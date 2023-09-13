@@ -1,0 +1,16 @@
+let
+baseUrl = "https://api.exactspotter.com/v3/###############", // Aqui você irá adicionar a referencia de qual segmentação de dados quer puxar
+token = "########################", // Aqui vcoê vai colocar sua chave API
+pageSize = 500,
+totalRecords = 2000, // Aqui você vai selecionar o número de registros que quer trazer. Por exemplo, se você quiser obter 2000 registros no total
+numberOfPages = Number.RoundUp(totalRecords / pageSize),
+allRecords = List.Generate(
+        () => [Page = 0, Result = {}],
+        each [Page] < numberOfPages,
+        each [Page = [Page] + 1, Result = Json.Document(Web.Contents(baseUrl & "?$skip=" & Text.From([Page] * pageSize), [Headers=[#"Content-Type"="application/json", token_exact=token]]))],
+        each [Result]
+),
+combinedData = Table.FromList(allRecords, Splitter.SplitByNothing()),
+    #"Linhas Filtradas" = Table.SelectRows(combinedData, each true),
+    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Linhas Filtradas", [PromoteAllScalars=true]),
+    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Column1", type any}}),

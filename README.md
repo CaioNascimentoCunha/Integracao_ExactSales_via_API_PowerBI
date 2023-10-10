@@ -1,4 +1,4 @@
-# Integr_ExactSales_PowerBI
+# Integração via API do CRM Exact Sales com o Power BI
 Nesse projeto, irei ajudar aos usuários do CRM da Exact Sales - o Spotter - a superar a limitação de requisições via API que o sistema disponibiliza.
 
 Para quem não conhece Spotter  é um software de sales engagement voltado para equipes de venda Inside Sales, que te ajuda a converter mais leads em vendas. E ele faz isso coletando dados que vão enriquecer a qualificação de leads em oportunidades. Por isso, extrair estas informações e combiná-las com outras fontes irá melhorar muito suas análises.
